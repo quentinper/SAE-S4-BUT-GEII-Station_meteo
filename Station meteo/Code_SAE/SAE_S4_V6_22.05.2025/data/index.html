@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:;">
+  <link rel="stylesheet" href="w3.css">
+  <title>Station météo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!--pour la selection des icones en barre des taches https://fontawesome.com/v6/icons -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3767/3767036.png" type="image/x-icon">
+</head>
+
+<body>
+  <header class="w3-container w3-blue w3-center ">
+    <h1 class="w3-xxlarge "><img src="https://cdn-icons-png.flaticon.com/512/3767/3767036.png" height="64"> Station Météo SAE S4 </h1>
+  </header>
+  <main>
+    <section class="w3-row-padding">
+      <article id="temperature" class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Temperature</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding">
+            <canvas id="canvas_temperature_id"></canvas>
+            <button style="margin-top: 5px;" class="w3-green " onclick="showCard('courbeTEMP')">Afficher la
+              courbe</button>
+          </div>
+        </div>
+      </article>
+      <article id="courbeTEMP" class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Courbe de Temperature</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding">
+            <button class="w3-green " onclick="getCourbeTemperature()">Charger la courbe</button>
+            <canvas id="temperatureGraph" width="500" height="300"></canvas>
+          </div>
+        </div>
+      </article>
+      <article id="illuminance" class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Illuminance</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding">
+            <canvas id="canvas_illuminance_id"></canvas>
+            <button style="margin-top: 5px;" class="w3-green " onclick="showCard('courbelUM')">Afficher la
+              courbe</button>
+          </div>
+        </div>
+      </article>
+      <article id="courbelUM" class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Courbe de Luminosité</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding">
+            <button class="w3-green " onclick="getCourbeIlluminance()">Charger la courbe</button>
+            <canvas id="illuminanceGraph" width="500" height="300"></canvas>
+          </div>
+        </div>
+      </article>
+      <article id="humidity" class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Humidity</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding">
+            <canvas id="canvas_humidity_id"></canvas>
+            <button style="margin-top: 5px;" class="w3-green " onclick="showCard('courbehUM')">Afficher la
+              courbe</button>
+          </div>
+        </div>
+      </article>
+      <article id="courbehUM" class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Courbe d'humidité</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding">
+            <button class="w3-green  " onclick="getCourbeHumidity()">Charger la courbe</button>
+            <canvas id="HumidityGraph" width="500" height="300"></canvas>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section class="w3-row-padding">
+      <article id="datetime" class="w3-third s4 w3-padding ">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Date and time</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding">
+            <form id="datetime-form" class="w3-container">
+              <label>Set day</label>
+              <select class="w3-select">
+                <option value="">--Please choose an option--</option>
+                <option value="0">Dimanche</option>
+                <option value="1">Lundi</option>
+                <option value="2">Mardi</option>
+                <option value="3">Mercredi</option>
+                <option value="4">Jeudi</option>
+                <option value="5">Vendredi</option>
+                <option value="6">Samedi</option>
+              </select>
+              <label>Set time</label>
+              <input id="thetime" class="w3-input" type="time" required>
+              <label>Set date</label>
+              <input id="thedate" class="w3-input" type="date" required>
+              <button type="submit" class="w3-button w3-gray w3-hover-green w3-border w3-margin-top">Valider</button>
+            </form>
+          </div>
+        </div>
+      </article>
+      <article id="Time" class="w3-third s4 w3-padding ">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Time</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding "
+            style="display: flex; justify-content: center; align-items: center;">
+            <div style="position: relative; width: 300px; height: 300px;">
+              <canvas id="horloge-minutes" style="position: absolute; top: 0; left: 0; z-index: 1;"></canvas>
+              <canvas id="horloge-heures" style="position: absolute; top: 0; left: 0; z-index: 2;"></canvas>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article id="settings" class="w3-third s4 w3-padding ">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Settings</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-center w3-light-grey w3-padding">
+            <h3>État des capteurs</h3>
+            <div class="w3-section">
+              <p>Température : <span id="sensor_temp" class="voyant"></span></p>
+              <p>Luminosité : <span id="sensor_light" class="voyant"></span></p>
+              <p>Humidité : <span id="sensor_humidity" class="voyant"></span></p>
+              <p>Date/Heure : <span id="sensor_datetime" class="voyant"></span></p>
+              <p>Carte SD : <span id="sensor_SDcarte" class="voyant"></span></p>
+              <p>Wifi : <span id="sensor_Wifi" class="voyant"></span></p>
+            </div>
+          </div>
+          <div class="w3-container w3-center w3-light-grey w3-padding">
+            <h3>État des LEDs</h3>
+            <div class="w3-section">
+              <button id="ON_LED" class="w3-button w3-grey w3-hover-green  w3-badge ">ON</button>
+              <button id="OFF_LED" class="w3-button w3-grey w3-hover-red  w3-badge">OFF</button>
+            </div>
+            <p>Intensité de la LED</span></p>
+            <input id="ledSlider" type="range" min="0" max="100" value="0">
+          </div>
+        </div>
+      </article>
+      <article id="openweathermap" class="w3-third s4 w3-padding ">
+        <div class="w3-card-4 w3-center">
+          <header class="w3-blue header-flex">
+            <h1 class="header-title">Open Weather Map</h1>
+            <div class="red-square">✕</div>
+          </header>
+          <div class="w3-container w3-light-grey w3-padding">
+            <form id="city-form" class="w3-container">
+              <label>Set city</label>
+              <input id="thecity" class="w3-input" type="text" required>
+              <button type="submit" class="w3-button w3-gray w3-hover-green w3-border w3-margin-top">Valider</button>
+            </form>
+            <div class="w3-responsive">
+              <table class="w3-table-all w3-center w3-card-4 w3-margin-top">
+                <tr>
+                  <th>Temperature</th>
+                  <th>Humidity</th>
+                  <th>Description</th>
+                  <th>Météo</th>
+                </tr>
+                <tr class="w3-blue">
+                  <td style="text-align: center; vertical-align: middle;" id="temp_city"></td>
+                  <td style="text-align: center; vertical-align: middle;" id="hum_city"></td>
+                  <td style="text-align: center; vertical-align: middle;" id="lum_city"></td>
+                  <td><img src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png"
+                      id="meteo_city" /> </td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="navbar footer-main">
+    <div>
+    </div>
+    <div>
+      <button onclick="showCard('temperature')" class="w3-button"><i class="fas fa-thermometer-half"></i></button>
+      <button onclick="showCard('illuminance')" class="w3-button"><i class="fas fa-lightbulb"></i></button>
+      <button onclick="showCard('humidity')" class="w3-button"><i class="fas fa-tint"></i></button>
+      <button onclick="showCard('datetime')" class="w3-button"><i class="fa-solid fa-sliders"></i></button>
+      <button onclick="showCard('Time')" class="w3-button"><i class="fas fa-clock"></i></button>
+      <button onclick="showCard('settings')" class="w3-button"><i class="fas fa-cog"></i></button>
+      <button onclick="showCard('openweathermap')" class="w3-button"><i class="fas fa-sun"></i></button>
+    </div>
+    <div>
+      <p style="color:black"> 2025 © Quentin PERBOST & Lorenzo SALVATORE Version 2.1 22/05/2025 </p>
+    </div>
+  </footer>
+  <script src="gauge.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:;">
+  <link rel="stylesheet" href="w3.css">
+  <title>ESP32 WebServer</title>
+</head>
+
+<body>
+  <!-- main content -->
+  <main>
+
+    <section class="w3-row-padding">
+
+      <article class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+
+          <header class=" w3-cobalt header-flex">
+            <h1 class="header-title">Temperature</h1>
+            <div class="red-square">
+              ✕
+            </div>
+          </header>
+
+          <div class="w3-container w3-light-grey  w3-padding">
+            <canvas id="canvas_temperature_id"></canvas>
+          </div>
+        </div>
+      </article>
+
+      <article class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+
+          <header class=" w3-cobalt header-flex">
+            <h1 class="header-title">Illuminance</h1>
+            <div class="red-square">
+              ✕
+            </div>
+          </header>
+
+          <div class="w3-container w3-light-grey  w3-padding">
+            <canvas id="canvas_illuminance_id"></canvas>
+          </div>
+        </div>
+      </article>
+
+      <article class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+
+          <header class=" w3-cobalt header-flex">
+            <h1 class="header-title">Humidity</h1>
+            <div class="red-square">
+              ✕
+            </div>
+          </header>
+
+          <div class="w3-container w3-light-grey  w3-padding">
+            <canvas id="canvas_humidity_id"></canvas>
+          </div>
+        </div>
+      </article>
+
+    </section>
+    <section class="w3-row-padding">
+
+      <article class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+
+          <header class=" w3-cobalt header-flex">
+            <h1 class="header-title">Date and time</h1>
+            <div class="red-square">
+              ✕
+            </div>
+          </header>
+
+          <div class="w3-container w3-light-grey  w3-padding">
+            <form class="w3-container">
+
+              <label>Set day</label>
+              <select class="w3-select">
+                <option value="">--Please choose an option--</option>
+                <option value="0">Dimanche</option>
+                <option value="1">Lundi</option>
+                <option value="2">Mardi</option>
+                <option value="3">Parrot</option>
+                <option value="4">Spider</option>
+                <option value="5">Goldfish</option>
+                <option value="6">Goldfish</option>
+              </select>
+
+              <label>Set time</label>
+              <input id="thetime" class="w3-input" type="time" required>
+
+              <label>Set date</label>
+              <input id="thedate" class="w3-input" type="date" required>
+              <button class="w3-button w3-gray w3-hover-green w3-border w3-margin-top">Button</button>
+            </form>
+          </div>
+        </div>
+      </article>
+
+      <article class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+
+          <header class=" w3-cobalt header-flex">
+            <h1 class="header-title">LEDs</h1>
+            <div class="red-square">
+              ✕
+            </div>
+          </header>
+
+          <div class="w3-light-grey w3-padding">
+            <label class="w3-center">Set LED</label>
+
+            <div>
+              <button id="ON_LED" class="w3-button w3-grey w3-hover-green"> ON </button>
+              <button id="OFF_LED" class="w3-button w3-grey w3-hover-red"> OFF </button>
+            </div>
+            <input type="range">
+          </div>
+        </div>
+      </article>
+
+      <article class="w3-third s4 w3-padding">
+        <div class="w3-card-4 w3-center">
+
+          <header class=" w3-cobalt header-flex">
+            <h1 class="header-title">Settings
+            </h1>
+            <div class="red-square">
+              ✕
+            </div>
+          </header>
+
+          <div class="w3-container w3-light-grey  w3-padding">
+            <canvas id="canvas_humidity_id"></canvas>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- to do -->
+
+
+  </main>
+  <!-- end main content -->
+  <!--  -->
+  <footer class="navbar">
+    <div>
+      <a href="#home" class="active">Start</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div>
+      <p>2025 © Quentin PERBOST & Lorenzo SALVATORE</p>
+    </div>
+
+  </footer>
+  <!---->
+  <script src="gauge.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
